@@ -15,7 +15,7 @@
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/bugfinder.git
+   git clone https://github.com/Hashif23/bugfinder.git
    cd bugfinder
    ```
 
