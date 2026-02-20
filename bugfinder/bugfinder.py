@@ -5,6 +5,7 @@ import os
 # Ensure the current directory is in the path to import local modules
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+import logging
 from config import Config
 from utils.logger import setup_logger
 
@@ -14,6 +15,7 @@ def main():
     parser.add_argument("-i", "--interactive", action="store_true", help="Enable Interactive Mode")
     parser.add_argument("-c", "--config", help="Path to configuration file")
     parser.add_argument("-o", "--output", help="Output file path")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose logging")
     parser.add_argument("--scan-type", help="Specific scan type (all, xss, sqli, headers, sast)", default="all")
     
     args = parser.parse_args()
@@ -22,7 +24,8 @@ def main():
     cfg = Config(args.config)
     
     # Initialize Logger
-    logger = setup_logger()
+    log_level = logging.DEBUG if args.verbose else logging.INFO
+    logger = setup_logger(level=log_level)
     logger.info("Initializing BugFinder...")
 
     target = args.target

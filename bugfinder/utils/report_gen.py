@@ -1,7 +1,6 @@
 import json
 import os
 import time
-from tabulate import tabulate
 from datetime import datetime
 
 class ReportGenerator:
@@ -28,8 +27,11 @@ class ReportGenerator:
                 severity_counts["INFO"] += 1 # Default bucket
 
         print("\n[+] Executive Summary")
-        summary_table = [[k, v] for k, v in severity_counts.items() if v > 0]
-        print(tabulate(summary_table, headers=["Severity", "Count"], tablefmt="grid"))
+        print(f"    Total Findings: {len(results)}")
+        print("    Severities:")
+        for sev, count in severity_counts.items():
+            if count > 0:
+                print(f"      - {sev}: {count}")
 
         # 2. Detailed Findings
         print("\n[+] Detailed Findings")
